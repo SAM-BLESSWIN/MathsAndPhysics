@@ -5,10 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
-  - strength
-  - speed
-  - invisible
-  - magic
+  - red
+  - yellow
+  - blue
+  - green
   layers:
   - Default
   - TransparentFX
@@ -18,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 

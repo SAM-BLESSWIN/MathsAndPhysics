@@ -1,19 +1,25 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckKey : MonoBehaviour
+public class CheckComboKeys : MonoBehaviour
 {
-    [SerializeField] private Keys doorKey;
+    [SerializeField] private List<Keys> Doorkeys = new List<Keys>();
     [SerializeField] private GameObject lockGameObject;
 
     [SerializeField][ReadOnlyInspector]
     private string keyBinary;
 
+    private int keyValue = 0;
+
     private void Start()
     {
-        keyBinary = MathLib.IntToBinaryForm(MathLib.SetBitPosition((int)doorKey),4);
+        foreach (Keys key in Doorkeys)
+        {
+            keyValue |= MathLib.SetBitPosition((int)key);
+        }
+
+        keyBinary = MathLib.IntToBinaryForm(keyValue,4);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,12 +28,11 @@ public class CheckKey : MonoBehaviour
 
         if (other.gameObject.TryGetComponent<SetKeys>(out var setKeys))
         {
-
-            if ((setKeys.MyKeys & MathLib.SetBitPosition((int)doorKey)) != 0)
+            foreach (Keys key in Doorkeys)
             {
-                Debug.Log("Have Key");
-                lockGameObject.SetActive(false);
+                if ((setKeys.MyKeys & MathLib.SetBitPosition((int)key)) == 0) return;
             }
+            lockGameObject.SetActive(false);
         }
     }
 

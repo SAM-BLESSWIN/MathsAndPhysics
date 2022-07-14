@@ -9,6 +9,9 @@ TagManager:
   - yellow
   - blue
   - green
+  - strength
+  - health
+  - strength+health
   layers:
   - Default
   - TransparentFX
@@ -19,9 +22,9 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
-  - 
+  - Cube
+  - Sphere
+  - Capsule
   - 
   - 
   - 
